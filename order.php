@@ -157,12 +157,12 @@
 
 		$('#add_button').click(function(){
 			$('#orderModal').modal('show');
-			$('#order_form')[0].reset();
-			$('.modal-title').html("<i class='fa fa-plus'></i> Create Order");
-			$('#action').val('Add');
-			$('#btn_action').val('Add');
-			$('#span_product_details').html('');
-			add_product_row();
+            $('#order_form')[0].reset();
+            $('.modal-title').html('<i class="fa fa-plus"></i> Create order');
+            $('#action').val('Add');
+            $('#btn_action').val('Add');
+            $('#span_product_details').html('');
+            add_product_row();
 		});
 
 		function add_product_row(count = '')
@@ -170,21 +170,18 @@
 			var html = '';
 			html += '<span id="row'+count+'"><div class="row">';
 			html += '<div class="col-md-8">';
-			html += '<select name="product_id[]" id="product_id'+count+'" class="form-control selectpicker" data-live-search="true" required>';
+			html += '<select name="product_id[]" id="product_id' + count + '" class="form-control selectpicker" data-live-search="true" required>';
 			html += '<?php echo fill_product_list($connect); ?>';
-			html += '</select><input type="hidden" name="hidden_product_id[]" id="hidden_product_id'+count+'" />';
+			html += '</select><input type="hidden" name="hidden_product_id[]" id="hidden_product_id' + count + '" />';
 			html += '</div>';
 			html += '<div class="col-md-3">';
 			html += '<input type="text" name="quantity[]" class="form-control" required />';
 			html += '</div>';
 			html += '<div class="col-md-1">';
-			if(count == '')
-			{
+			if(count == '') {
 				html += '<button type="button" name="add_more" id="add_more" class="btn btn-success btn-xs">+</button>';
-			}
-			else
-			{
-				html += '<button type="button" name="remove" id="'+count+'" class="btn btn-danger btn-xs remove">-</button>';
+			} else {
+				html += '<button type="button" name="remove" id="' + count +'" class="btn btn-danger btn-xs remove">-</button>';
 			}
 			html += '</div>';
 			html += '</div></div><br /></span>';
@@ -206,20 +203,20 @@
 
 		$(document).on('submit', '#order_form', function(event){
 			event.preventDefault();
-			$('#action').attr('disabled', 'disabled');
+			$('#action').attr('dsiabled', 'dsiabled');
 			var form_data = $(this).serialize();
 			$.ajax({
-				url:"order_action.php",
-				method:"POST",
-				data:form_data,
-				success:function(data){
-					$('#order_form')[0].reset();
-					$('#orderModal').modal('hide');
-					$('#alert_action').fadeIn().html('<div class="alert alert-success">'+data+'</div>');
-					$('#action').attr('disabled', false);
-					orderdataTable.ajax.reload();
-				}
-			});
+                url: 'order_action.php',
+                method: 'POST',
+                data: form_data,
+                success:function (data) {
+                    $('#order_form')[0].reset();
+                    $('#orderModal').modal('hide');
+                    $('#alert_action').fadeIn().html('<div class="alert alert-success">' + data + '</div>');
+                    $('#action').attr('disabled', false);
+                    orderdataTable.ajax.reload();
+                }
+            });
 		});
 
 		$(document).on('click', '.update', function(){
